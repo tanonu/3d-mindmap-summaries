@@ -9,12 +9,12 @@ and be presented with a concise interactive 3D network summary of the text.
 
 It exists to make the structure of a piece of writing visible at a glance, and to explore how far a transparent, rule-based model can go before a large language model is needed. Everything runs in the browser, any tested input text never leaves the page.
 
-![App Screenshot Main Scene](./docs:images:/scene_aladdin.png)
+![App Screenshot Main Scene](./docs/images/scene_aladdin.png)
 
 | | |
 | :---: | :---: |
-| ![Subplot 1](./docs:images:/scene_emperor.png) | ![Subplot 2](./docs:images:/scene_addiction.png) |
-| ![Subplot 1](./docs:images:/card.png) | ![Subplot 2](./docs:images:/text_field.png) |
+| ![Subplot 1](./docs/images/scene_emperor.png) | ![Subplot 2](./docs/images/scene_addiction.png) |
+| ![Subplot 1](./docs/images/card.png) | ![Subplot 2](./docs/images/text_field.png) |
 
 ## Design Decisions
 

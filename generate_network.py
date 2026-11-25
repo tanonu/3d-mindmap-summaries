@@ -67,6 +67,7 @@ THREE_SCRIPTS: Final[Tuple[str, ...]] = (
 # Small helpers
 # --------------------------------------------------------------------------
 
+
 def word_count(text: str) -> int:
     """Return the number of whitespace-separated words in ``text``."""
     return len(text.split())
@@ -101,6 +102,7 @@ def fetch_url(url: str) -> str:
 # --------------------------------------------------------------------------
 # Building blocks of the HTML page
 # --------------------------------------------------------------------------
+
 
 def library_script_tags(inline: bool) -> str:
     """Return the ``<script>`` markup that loads three.js and its add-ons.
@@ -141,9 +143,22 @@ def page_config_json(text: str) -> str:
         A JSON object with ``minWords``, ``maxWords`` and ``text``.
     """
     samples = [
-        {"label": "Aladdin", "zoom": 1.185, "text": read_text_file(ALADDIN_PATH) if ALADDIN_PATH.exists() else ""},
-        {"label": "The Emperor's New Clothes", "zoom": 1.471, "spin": 0.6582, "text": read_text_file(SAMPLE_PATH)},
-        {"label": "Addiction (Wikipedia)", "zoom": 1.171, "text": read_text_file(ADDICTION_PATH) if ADDICTION_PATH.exists() else ""},
+        {
+            "label": "Aladdin",
+            "zoom": 1.185,
+            "text": read_text_file(ALADDIN_PATH) if ALADDIN_PATH.exists() else "",
+        },
+        {
+            "label": "The Emperor's New Clothes",
+            "zoom": 1.471,
+            "spin": 0.6582,
+            "text": read_text_file(SAMPLE_PATH),
+        },
+        {
+            "label": "Addiction (Wikipedia)",
+            "zoom": 1.171,
+            "text": read_text_file(ADDICTION_PATH) if ADDICTION_PATH.exists() else "",
+        },
     ]
     payload = {"minWords": MIN_WORDS, "maxWords": MAX_WORDS, "text": text, "samples": samples}
     return json.dumps(payload, ensure_ascii=False).replace("</", "<\\/")
@@ -213,6 +228,7 @@ def check_project_files() -> None:
 # Command line
 # --------------------------------------------------------------------------
 
+
 def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
     """Parse command-line arguments.
 
@@ -226,13 +242,18 @@ def parse_args(argv: Optional[Sequence[str]] = None) -> argparse.Namespace:
         description="Build a static, interactive text-to-network page.",
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )
-    parser.add_argument("--out", type=Path, default=DEFAULT_OUTPUT,
-                        help="output HTML file (default: %(default)s)")
-    parser.add_argument("--text", type=Path, default=None,
-                        help="text file to preload (default: sample_text.txt)")
+    parser.add_argument(
+        "--out", type=Path, default=DEFAULT_OUTPUT, help="output HTML file (default: %(default)s)"
+    )
+    parser.add_argument(
+        "--text", type=Path, default=None, help="text file to preload (default: sample_text.txt)"
+    )
     parser.add_argument("--title", default=DEFAULT_TITLE, help="browser title of the page")
-    parser.add_argument("--inline", action="store_true",
-                        help="embed three.js so the page works offline (downloads it once)")
+    parser.add_argument(
+        "--inline",
+        action="store_true",
+        help="embed three.js so the page works offline (downloads it once)",
+    )
     return parser.parse_args(argv)
 
 
@@ -246,7 +267,7 @@ def main(argv: Optional[Sequence[str]] = None) -> int:
         Process exit code: 0 on success.
     """
     args = parse_args(argv)
-    text = read_text_file(args.text if args.text else ALADDIN_PATH)   # Aladdin is the default text
+    text = read_text_file(args.text if args.text else ALADDIN_PATH)  # Aladdin is the default text
 
     words = word_count(text)
     if not MIN_WORDS <= words <= MAX_WORDS:
