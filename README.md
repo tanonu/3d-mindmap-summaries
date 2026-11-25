@@ -1,6 +1,6 @@
 # 3D Mindmap Summaries
 
-This is a showcase project.
+This is a showcase project. View the **Live Demo**: [https://tanonu.github.io/3d-mindmap-summaries/](https://tanonu.github.io/3d-mindmap-summaries/)
 
 The core idea of this mini project:
 Design a webpage,
